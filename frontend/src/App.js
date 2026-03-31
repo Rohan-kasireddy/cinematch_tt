@@ -12,8 +12,10 @@ export default function App() {
 
   const fetchMovies = (q = "") => {
     setLoading(true);
-    const base = "http://localhost:8081/api/movies";
-    const url = q.trim() ? `${base}/search?q=${encodeURIComponent(q.trim())}` : `${base}`;
+    const base = process.env.REACT_APP_API_URL || "http://localhost:8081";
+const url = q.trim()
+  ? `${base}/api/movies/search?q=${encodeURIComponent(q.trim())}`
+  : `${base}/api/movies`;
 
     axios
       .get(url)
